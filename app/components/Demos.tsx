@@ -5,7 +5,9 @@ import { EASE, scaleIn, staggerParent, viewportOnce } from "./MotionWrapper";
 import type { Demo } from "@/data/projects";
 
 /** Recordings for a single project, rendered on its case study page. */
-export function Demos({ demos }: { demos: Demo[] }) {
+export function Demos({ demos: all }: { demos: Demo[] }) {
+  // Recordings that do not exist yet are not shown: no "coming soon" tiles.
+  const demos = all.filter((d) => d.src);
   if (demos.length === 0) return null;
 
   return (
@@ -21,8 +23,7 @@ export function Demos({ demos }: { demos: Demo[] }) {
           key={demo.id}
           variants={scaleIn}
           transition={{ duration: 0.5, ease: EASE }}
-          whileHover={{ y: -2 }}
-          className="border-border bg-surface hover:border-gold overflow-hidden rounded-xl border transition-[border-color,box-shadow] hover:shadow-[0_8px_24px_rgba(22,41,61,.06)]"
+          className="border-border bg-surface hover:border-gold overflow-hidden rounded-md border transition-colors"
         >
           <Media demo={demo} />
           <div className="p-[22px]">

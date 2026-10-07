@@ -72,7 +72,7 @@ export default async function ProjectPage({
                 href={project.liveUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-sea hover:bg-navy inline-flex items-center rounded-full px-4 py-2 font-mono text-xs text-white transition-colors"
+                className="bg-sea hover:bg-navy inline-flex items-center rounded px-4 py-2 font-mono text-xs text-bg transition-colors"
               >
                 Ver online
               </a>
@@ -80,7 +80,7 @@ export default async function ProjectPage({
               <span
                 aria-disabled="true"
                 title="Ainda não publicado"
-                className="border-border text-ink-muted inline-flex cursor-not-allowed items-center rounded-full border border-dashed px-4 py-2 font-mono text-xs"
+                className="border-border text-ink-muted inline-flex cursor-not-allowed items-center rounded border border-dashed px-4 py-2 font-mono text-xs"
               >
                 Ver online
               </span>
@@ -90,7 +90,7 @@ export default async function ProjectPage({
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="border-border text-ink hover:border-sea hover:text-sea inline-flex items-center rounded-full border px-4 py-2 font-mono text-xs transition-colors"
+              className="border-border text-ink hover:border-sea hover:text-sea inline-flex items-center rounded border px-4 py-2 font-mono text-xs transition-colors"
             >
               GitHub
             </a>
@@ -146,14 +146,27 @@ export default async function ProjectPage({
           </section>
         ) : null}
 
+        {project.diagram ? (
+          <section aria-labelledby="arch-heading" className="mt-12">
+            <h2 id="arch-heading" className="text-[22px]">
+              Arquitetura
+            </h2>
+            <pre className="border-border bg-surface text-ink mt-4 overflow-x-auto rounded-md border p-5 font-mono text-[12px] leading-[1.7]">
+              {project.diagram}
+            </pre>
+          </section>
+        ) : null}
+
+        {project.images && project.images.length > 0 ? (
         <section aria-labelledby="gallery-heading" className="mt-12">
           <h2 id="gallery-heading" className="text-[22px]">
             Telas
           </h2>
           <Gallery images={project.images} name={project.name} />
         </section>
+        ) : null}
 
-        {demos.length > 0 ? (
+        {demos.some((d) => d.src) ? (
           <section aria-labelledby="demos-heading" className="mt-12">
             <h2 id="demos-heading" className="text-[22px]">
               Demonstrações
@@ -175,7 +188,7 @@ export default async function ProjectPage({
             {project.stack.map((tech) => (
               <li
                 key={tech}
-                className="border-border bg-surface text-ink rounded-full border px-3 py-1.5 font-mono text-[11px]"
+                className="border-border bg-surface text-ink rounded border px-3 py-1.5 font-mono text-[11px]"
               >
                 {tech}
               </li>
@@ -198,13 +211,7 @@ export default async function ProjectPage({
 
 function Gallery({ images, name }: { images?: string[]; name: string }) {
   if (!images || images.length === 0) {
-    return (
-      <div className="border-border bg-surface-2 mt-4 flex h-[180px] w-full items-center justify-center rounded-xl border">
-        <span className="text-ink-muted font-mono text-[11px] tracking-widest uppercase">
-          Captura pendente
-        </span>
-      </div>
-    );
+    return null;
   }
 
   return (
@@ -212,7 +219,7 @@ function Gallery({ images, name }: { images?: string[]; name: string }) {
       {images.map((src, i) => (
         <li
           key={src}
-          className="border-border bg-surface-2 relative aspect-video overflow-hidden rounded-xl border"
+          className="border-border bg-surface-2 relative aspect-video overflow-hidden rounded-md border"
         >
           <Image
             src={src}

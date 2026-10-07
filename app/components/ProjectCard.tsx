@@ -27,7 +27,7 @@ export function StatusBadge({ status }: { status: ProjectStatus }) {
   const { label, className } = STATUS[status];
   return (
     <span
-      className={`shrink-0 rounded-full border px-2 py-0.5 font-mono text-[10px] tracking-wider uppercase ${className}`}
+      className={`shrink-0 rounded border px-2 py-0.5 font-mono text-[10px] tracking-wider uppercase ${className}`}
     >
       {label}
     </span>
@@ -39,8 +39,7 @@ export function ProjectCard({ project }: { project: Project }) {
     <motion.li
       variants={fadeUp}
       transition={{ duration: 0.6, ease: EASE }}
-      whileHover={{ y: -2 }}
-      className="border-border bg-surface hover:border-gold relative flex flex-col overflow-hidden rounded-xl border transition-[border-color,box-shadow] hover:shadow-[0_8px_24px_rgba(22,41,61,.06)]"
+      className="border-border bg-surface hover:border-gold relative flex flex-col overflow-hidden rounded-md border transition-colors"
     >
       <Thumbnail project={project} />
 
@@ -86,7 +85,7 @@ export function ProjectCard({ project }: { project: Project }) {
             <span
               aria-disabled="true"
               title="Ainda não publicado"
-              className="border-border text-ink-muted inline-flex cursor-not-allowed items-center rounded-full border border-dashed px-3 py-1.5 font-mono text-[11px]"
+              className="border-border text-ink-muted inline-flex cursor-not-allowed items-center rounded border border-dashed px-3 py-1.5 font-mono text-[11px]"
             >
               Ver online
             </span>
@@ -117,7 +116,7 @@ function CardLink({
 }) {
   const styles =
     variant === "primary"
-      ? "bg-sea text-white hover:bg-navy"
+      ? "bg-sea text-bg hover:bg-navy"
       : "border-border text-ink hover:border-sea hover:text-sea border";
 
   return (
@@ -125,7 +124,7 @@ function CardLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className={`inline-flex items-center rounded-full px-3 py-1.5 font-mono text-[11px] transition-colors ${styles}`}
+      className={`inline-flex items-center rounded px-3 py-1.5 font-mono text-[11px] transition-colors ${styles}`}
     >
       {children}
     </a>
@@ -147,23 +146,14 @@ function Thumbnail({ project }: { project: Project }) {
     );
   }
 
+  if (!project.diagram) return null;
+
   return (
-    <div
-      aria-hidden
-      className="border-border bg-surface-2 relative flex h-[104px] w-full items-center justify-center overflow-hidden border-b"
+    <pre
+      aria-label={`Diagrama de arquitetura — ${project.name}`}
+      className="border-border bg-bg text-ink-muted overflow-x-auto border-b px-[22px] py-4 font-mono text-[11px] leading-[1.6]"
     >
-      {/* Subtle grid so empty cards still read as intentional. */}
-      <div
-        className="absolute inset-0 opacity-40"
-        style={{
-          backgroundImage:
-            "linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)",
-          backgroundSize: "24px 24px",
-        }}
-      />
-      <span className="text-ink-muted relative font-mono text-[10px] tracking-widest uppercase">
-        Captura pendente
-      </span>
-    </div>
+      {project.diagram}
+    </pre>
   );
 }
