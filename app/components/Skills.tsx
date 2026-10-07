@@ -32,14 +32,8 @@ export function Skills() {
                   key={skill.name}
                   variants={fadeUp}
                   transition={{ duration: 0.4, ease: EASE }}
-                  whileHover={{ y: -2 }}
-                  className="border-border bg-surface text-ink hover:border-gold inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 transition-colors"
+                  className="border-border bg-surface text-ink hover:border-gold inline-flex items-center gap-1.5 rounded border px-3 py-1.5 transition-colors"
                 >
-                  {skill.icon ? (
-                    <span aria-hidden className="text-[13px] leading-none">
-                      {skill.icon}
-                    </span>
-                  ) : null}
                   <span className="font-mono text-[11px]">{skill.name}</span>
                 </motion.li>
               ))}
