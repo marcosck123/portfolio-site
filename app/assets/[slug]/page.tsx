@@ -38,7 +38,7 @@ export default async function AssetPage({
   // this surface. The high-contrast variant clears 4.5:1 for every token.
   const highlighted = await codeToHtml(asset.code, {
     lang: asset.language,
-    theme: "github-light-high-contrast",
+    theme: "github-dark-default",
   });
 
   const categoryLabel =
@@ -97,7 +97,7 @@ export default async function AssetPage({
             <CopyButton text={asset.code} label="Copiar código" />
           </div>
 
-          <div className="code-block border-border bg-surface overflow-hidden rounded-xl border">
+          <div className="code-block border-border bg-surface overflow-hidden rounded-md border">
             {/*
               Shiki output is generated server-side from local snippet data
               defined in data/assets.ts — never from user input.

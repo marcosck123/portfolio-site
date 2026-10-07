@@ -60,7 +60,7 @@ export default function Home() {
           </p>
           <Link
             href="/contact"
-            className="bg-sea hover:bg-navy mt-7 inline-flex items-center gap-2 rounded-full px-6 py-2.5 font-mono text-[13px] text-white transition-colors"
+            className="bg-sea hover:bg-navy mt-7 inline-flex items-center gap-2 rounded px-6 py-2.5 font-mono text-[13px] text-bg transition-colors"
           >
             Entrar em contato
             <span aria-hidden>→</span>

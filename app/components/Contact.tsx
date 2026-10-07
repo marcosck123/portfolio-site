@@ -9,7 +9,7 @@ import { site } from "@/data/site";
 export function Contact() {
   return (
     <motion.div
-      className="border-border bg-surface flex flex-col items-start gap-6 rounded-xl border p-[22px] sm:flex-row sm:items-center sm:gap-8"
+      className="border-border bg-surface flex flex-col items-start gap-6 rounded-md border p-[22px] sm:flex-row sm:items-center sm:gap-8"
       initial="hidden"
       whileInView="visible"
       viewport={viewportOnce}
@@ -51,7 +51,7 @@ export function Contact() {
             <span
               aria-disabled="true"
               title="Link do LinkedIn ainda não configurado"
-              className="border-border text-ink-muted inline-flex cursor-not-allowed items-center rounded-full border border-dashed px-3 py-1.5 font-mono text-[11px]"
+              className="border-border text-ink-muted inline-flex cursor-not-allowed items-center rounded border border-dashed px-3 py-1.5 font-mono text-[11px]"
             >
               LinkedIn
             </span>
@@ -62,7 +62,7 @@ export function Contact() {
             label={site.email}
             copiedLabel="Copiado!"
             announcement="E-mail copiado para a área de transferência"
-            className="bg-sea hover:bg-navy inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 font-mono text-[11px] text-white transition-colors"
+            className="bg-sea hover:bg-navy inline-flex items-center gap-1.5 rounded px-3 py-1.5 font-mono text-[11px] text-bg transition-colors"
           />
         </div>
       </motion.div>
@@ -82,10 +82,8 @@ function ContactLink({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className="border-border text-ink hover:border-sea hover:text-sea inline-flex items-center rounded-full border px-3 py-1.5 font-mono text-[11px] transition-colors"
+      className="border-border text-ink hover:border-sea hover:text-sea inline-flex items-center rounded border px-3 py-1.5 font-mono text-[11px] transition-colors"
     >
       {children}
     </motion.a>

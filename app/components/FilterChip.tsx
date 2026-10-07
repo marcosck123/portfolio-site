@@ -15,9 +15,9 @@ export function FilterChip({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`rounded-full border px-3 py-1.5 font-mono text-[11px] transition-colors ${
+      className={`rounded border px-3 py-1.5 font-mono text-[11px] transition-colors ${
         active
-          ? "border-sea bg-sea text-white"
+          ? "border-sea bg-sea text-bg"
           : "border-border bg-surface text-ink-muted hover:border-sea hover:text-sea"
       }`}
     >

@@ -97,7 +97,7 @@ export function ContactForm() {
         tabIndex={-1}
         role="status"
         aria-live="polite"
-        className="border-border bg-surface rounded-xl border p-[22px]"
+        className="border-border bg-surface rounded-md border p-[22px]"
       >
         <div aria-hidden className="bg-gold h-[2px] w-12" />
         <h2 className="mt-5 text-[22px]">Mensagem enviada</h2>
@@ -115,7 +115,7 @@ export function ContactForm() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="border-sea text-sea hover:bg-sea inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-mono text-[13px] transition-colors hover:text-white"
+              className="border-sea text-sea hover:bg-sea inline-flex items-center gap-2 rounded border px-5 py-2.5 font-mono text-[13px] transition-colors hover:text-bg"
             >
               <span aria-hidden>◈</span>
               Continuar no WhatsApp →
@@ -128,7 +128,7 @@ export function ContactForm() {
               mounted.current = Date.now();
               setStatus("idle");
             }}
-            className="border-border text-ink hover:border-sea hover:text-sea inline-flex items-center rounded-full border px-5 py-2.5 font-mono text-[13px] transition-colors"
+            className="border-border text-ink hover:border-sea hover:text-sea inline-flex items-center rounded border px-5 py-2.5 font-mono text-[13px] transition-colors"
           >
             Enviar outra mensagem
           </button>
@@ -141,7 +141,7 @@ export function ContactForm() {
     <form
       onSubmit={onSubmit}
       noValidate
-      className="border-border bg-surface rounded-xl border p-[22px]"
+      className="border-border bg-surface rounded-md border p-[22px]"
     >
       {/* Honeypot: hidden from sight, from the a11y tree and from tab order. */}
       <input
@@ -214,7 +214,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === "submitting"}
-          className="bg-sea hover:bg-navy inline-flex items-center rounded-full px-6 py-2.5 font-mono text-[13px] text-white transition-colors disabled:cursor-not-allowed disabled:opacity-70"
+          className="bg-sea hover:bg-navy inline-flex items-center rounded px-6 py-2.5 font-mono text-[13px] text-bg transition-colors disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "submitting" ? "Enviando…" : "Enviar proposta"}
         </button>

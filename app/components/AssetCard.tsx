@@ -11,8 +11,7 @@ export function AssetCard({ asset }: { asset: CodeAsset }) {
     <motion.li
       variants={fadeUp}
       transition={{ duration: 0.6, ease: EASE }}
-      whileHover={{ y: -2 }}
-      className="border-border bg-surface hover:border-gold relative flex flex-col rounded-xl border p-[22px] transition-[border-color,box-shadow] hover:shadow-[0_8px_24px_rgba(22,41,61,.06)]"
+      className="border-border bg-surface hover:border-gold relative flex flex-col rounded-md border p-[22px] transition-colors"
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-[19px] leading-snug">

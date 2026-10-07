@@ -17,7 +17,7 @@ export function WhatsAppButton({
   className?: string;
 }) {
   const base =
-    "inline-flex items-center gap-2 rounded-full border px-5 py-2.5 font-mono text-[13px] transition-colors";
+    "inline-flex items-center gap-2 rounded border px-5 py-2.5 font-mono text-[13px] transition-colors";
 
   if (!contact.whatsappNumber) {
     return (
@@ -37,7 +37,7 @@ export function WhatsAppButton({
       href={whatsappUrl(contact.whatsappNumber, text)}
       target="_blank"
       rel="noopener noreferrer"
-      className={`border-sea text-sea hover:bg-sea hover:text-white ${base} ${className}`}
+      className={`border-sea text-sea hover:bg-sea hover:text-bg ${base} ${className}`}
     >
       <span aria-hidden>◈</span>
       {label}

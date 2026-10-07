@@ -43,12 +43,10 @@ export function CopyButton({
     <motion.button
       type="button"
       onClick={copy}
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
       className={
         className ||
-        "border-border bg-surface text-ink hover:border-sea hover:text-sea inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-mono text-xs transition-colors"
+        "border-border bg-surface text-ink hover:border-sea hover:text-sea inline-flex items-center gap-1.5 rounded border px-3 py-1.5 font-mono text-xs transition-colors"
       }
     >
       <span aria-hidden>{copied ? "✓" : "⧉"}</span>

@@ -1,44 +1,39 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Coastal light theme.
+   Dark terminal theme.
    Tailwind v4 is CSS-first: this @theme block *is* the Tailwind config
    (there is no tailwind.config.ts in v4). Each token becomes a utility,
    e.g. --color-sea -> bg-sea / text-sea / border-sea.
    --------------------------------------------------------------------------- */
 @theme {
   /* Backgrounds */
-  --color-bg: #f6f2ea; /* page — warm off-white */
-  --color-surface: #fbf8f1; /* cards — light beige, elevated */
-  --color-surface-2: #eee7d8; /* alternating sections */
+  --color-bg: #0d1117; /* page */
+  --color-surface: #161b22; /* cards */
+  --color-surface-2: #1c2128; /* alternating sections */
 
   /* Text */
-  --color-ink: #16293d; /* primary text — deep navy — 13.3:1 on bg */
-  --color-ink-muted: #4c5d6e; /* secondary text — 6.1:1 on bg */
+  --color-ink: #e6edf3; /* primary text */
+  --color-ink-muted: #8b949e; /* secondary text — ~6:1 on bg */
 
   /* Brand */
-  --color-navy: #1b3a57; /* headings — 10.5:1 on bg */
-  --color-sea: #2e6e5f; /* action/links — sea green — white-on-sea = 6:1 */
-  --color-gold: #b8935a; /* ORNAMENT ONLY (lines, hover borders, large icons) */
-  --color-gold-ink: #8f6f3e; /* darkened gold — only LARGE/bold text (AA-large) */
+  --color-navy: #f0f6fc; /* headings */
+  --color-sea: #3fb950; /* action/links — dark text on it is ~8:1 */
+  --color-gold: #d29922; /* ornament only (lines, hover borders) */
+  --color-gold-ink: #e3b341;
 
   /* Lines */
-  --color-border: #e0d6c4; /* beige, subtle — dividers and card edges */
-  /*
-   * Form-control borders. WCAG 1.4.11 wants 3:1 for the boundary that
-   * identifies an input; --color-border is only 1.36:1 on --color-surface,
-   * which is fine for a decorative divider but not for a field outline.
-   * This taupe measures ~3.7:1 on surface.
-   */
-  --color-border-strong: #8b7e68;
+  --color-border: #30363d; /* dividers and card edges */
+  /* Form-control outline — WCAG 1.4.11 wants 3:1 against the surface. */
+  --color-border-strong: #6e7681;
 
-  /* Status — dark enough to clear AA as text on the light surfaces above. */
-  --color-status-live: #166534;
-  --color-status-progress: #92400e;
-  --color-status-soon: #4c5d6e;
+  /* Status */
+  --color-status-live: #3fb950;
+  --color-status-progress: #d29922;
+  --color-status-soon: #8b949e;
 
-  /* Typography */
-  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  /* Typography — headings are mono too: it is the whole look. */
+  --font-serif: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, monospace;
 }
@@ -51,7 +46,7 @@ html {
   /* Keep section headings clear of the sticky nav when jumped to via anchor. */
   scroll-padding-top: 5rem;
   background-color: var(--color-bg);
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 body {
@@ -74,7 +69,7 @@ h4 {
   font-family: var(--font-serif);
   font-weight: 600;
   color: var(--color-navy);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 
 ::selection {
