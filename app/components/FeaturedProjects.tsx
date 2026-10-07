@@ -5,8 +5,8 @@ import { staggerParent, viewportOnce } from "./MotionWrapper";
 import { ProjectCard } from "./ProjectCard";
 import { projects } from "@/data/projects";
 
-/** Landing teaser: featured projects only, capped at three. */
-const featured = projects.filter((project) => project.featured).slice(0, 3);
+/** Landing teaser: featured projects only, capped at four. */
+const featured = projects.filter((project) => project.featured).slice(0, 4);
 
 export function FeaturedProjects() {
   if (featured.length === 0) return null;
