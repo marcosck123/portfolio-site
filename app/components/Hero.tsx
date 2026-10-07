@@ -1,106 +1,107 @@
-"use client";
-
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { EASE } from "./MotionWrapper";
 import { site } from "@/data/site";
+import { projects as all } from "@/data/projects";
 
-const rise = {
-  hidden: { opacity: 0, y: -16 },
-  visible: { opacity: 1, y: 0 },
-};
-
-// Created once at module scope — building it inside render would remount the
-// anchor on every re-render.
-const MotionAnchor = motion.create(Link);
+// Terminal shows the featured projects only; `npm test` lists those that
+// state a test count in their first result.
+const projects = all.filter((p) => p.featured);
+const tested = projects.filter((p) => p.results?.[0]?.includes("teste"));
 
 export function Hero() {
+  const pad = Math.max(...projects.map((p) => p.slug.length)) + 4;
+
   return (
     <section
       aria-labelledby="hero-heading"
-      className="w-full px-6 pt-20 pb-24 sm:pt-28 sm:pb-28"
+      className="w-full px-6 pt-16 pb-20 sm:pt-24 sm:pb-24"
     >
-      <motion.div
-        className="mx-auto w-full max-w-[980px]"
-        initial="hidden"
-        animate="visible"
-        variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.1 } } }}
-      >
-        {/* Short gold stroke — ornament only, never text. */}
-        <motion.div
-          variants={{
-            hidden: { opacity: 0, scaleX: 0 },
-            visible: { opacity: 1, scaleX: 1 },
-          }}
-          transition={{ duration: 0.6, ease: EASE }}
-          aria-hidden
-          className="bg-gold h-[2px] w-12 origin-left"
-        />
+      <div className="mx-auto grid w-full max-w-[980px] gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+        <div>
+          <p className="text-ink-muted font-mono text-[12px]">
+            <span className="text-sea">~</span> {site.role.toLowerCase()} ·{" "}
+            {site.location.toLowerCase()}
+          </p>
 
-        <motion.p
-          variants={rise}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="text-ink-muted mt-6 font-mono text-[11px] tracking-[0.25em] uppercase"
-        >
-          {site.role} · {site.location}
-        </motion.p>
+          <h1
+            id="hero-heading"
+            className="mt-4 text-[30px] leading-[1.2] sm:text-[38px]"
+          >
+            Sistemas de tempo real, IoT e fintech
+            <span className="text-sea" aria-hidden>
+              _
+            </span>
+          </h1>
 
-        <motion.h1
-          id="hero-heading"
-          variants={rise}
-          transition={{ duration: 0.7, ease: EASE }}
-          className="mt-5 max-w-3xl text-[34px] leading-[1.15] text-balance sm:text-[46px] md:text-[54px]"
-        >
-          Sou Marcos. Construo{" "}
-          <span className="text-sea italic">sistemas de tempo real</span>, IoT e
-          fintech.
-        </motion.h1>
+          <p className="text-ink-muted mt-5 max-w-xl text-[15px] leading-relaxed">
+            {site.tagline}
+          </p>
 
-        <motion.p
-          variants={rise}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="text-ink-muted mt-6 max-w-2xl text-[15px] leading-relaxed sm:text-base"
-        >
-          {site.tagline}
-        </motion.p>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Link
+              href="/projects"
+              className="bg-sea hover:bg-navy text-bg inline-flex items-center rounded px-5 py-2 font-mono text-[13px] font-medium transition-colors"
+            >
+              ls projetos/
+            </Link>
+            <a
+              href={site.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-border text-ink hover:border-sea hover:text-sea inline-flex items-center rounded border px-5 py-2 font-mono text-[13px] transition-colors"
+            >
+              github/{site.githubUser}
+            </a>
+            <Link
+              href="/contact"
+              className="text-ink-muted hover:text-sea px-2 py-2 font-mono text-[13px] transition-colors"
+            >
+              contato →
+            </Link>
+          </div>
+        </div>
 
-        <motion.div
-          variants={rise}
-          transition={{ duration: 0.6, ease: EASE }}
-          className="mt-9 flex flex-wrap items-center gap-3"
+        {/* Terminal window — every line comes from data/projects.ts. */}
+        <div
+          role="img"
+          aria-label="Terminal listando os projetos, a categoria e a quantidade de testes"
+          className="border-border bg-surface overflow-hidden rounded-md border font-mono text-[12px]"
         >
-          <MotionLink href="/projects" primary>
-            Ver projetos <span aria-hidden>→</span>
-          </MotionLink>
-          <MotionLink href="/contact">Entrar em contato</MotionLink>
-        </motion.div>
-      </motion.div>
+          <div className="border-border bg-surface-2 flex items-center gap-1.5 border-b px-3 py-2">
+            <span className="bg-border-strong h-2.5 w-2.5 rounded-full" />
+            <span className="bg-border-strong h-2.5 w-2.5 rounded-full" />
+            <span className="bg-border-strong h-2.5 w-2.5 rounded-full" />
+            <span className="text-ink-muted ml-2 text-[11px]">
+              marcos@dev: ~/projetos
+            </span>
+          </div>
+          <pre className="text-ink overflow-x-auto p-4 leading-[1.8]">
+            <span className="text-sea">$</span> ls -l
+            {"\n"}
+            {projects.map((p) => (
+              <span key={p.id}>
+                {p.slug.padEnd(pad)}
+                <span className="text-ink-muted">
+                  {p.category?.toLowerCase()}
+                </span>
+                {"\n"}
+              </span>
+            ))}
+            {"\n"}
+            <span className="text-sea">$</span> npm test
+            {"\n"}
+            {tested.map((p) => (
+              <span key={p.id}>
+                <span className="text-sea">✓</span> {p.slug.padEnd(pad - 2)}
+                <span className="text-ink-muted">{p.results?.[0]}</span>
+                {"\n"}
+              </span>
+            ))}
+            {"\n"}
+            <span className="text-sea">$</span>{" "}
+            <span className="bg-ink inline-block h-[14px] w-[7px] translate-y-[2px] animate-pulse" />
+          </pre>
+        </div>
+      </div>
     </section>
-  );
-}
-
-function MotionLink({
-  href,
-  primary = false,
-  children,
-}: {
-  href: string;
-  primary?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <MotionAnchor
-      href={href}
-      whileHover={{ scale: 1.04 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ type: "spring", stiffness: 400, damping: 25 }}
-      className={
-        primary
-          ? "bg-sea hover:bg-navy inline-flex items-center gap-2 rounded-full px-6 py-2.5 font-mono text-[13px] text-white transition-colors"
-          : "border-border text-ink hover:border-sea hover:text-sea inline-flex items-center rounded-full border px-6 py-2.5 font-mono text-[13px] transition-colors"
-      }
-    >
-      {children}
-    </MotionAnchor>
   );
 }

@@ -31,13 +31,10 @@ export function Navbar() {
         <div className="flex items-center justify-between gap-4">
           <Link
             href="/"
-            className="text-navy font-serif text-base font-semibold tracking-tight"
+            className="text-navy font-mono text-sm font-semibold"
             onClick={() => setOpen(false)}
           >
-            {site.name}
-            <span className="text-gold" aria-hidden>
-              .
-            </span>
+            <span className="text-sea" aria-hidden>~/</span>{site.name.toLowerCase()}
           </Link>
 
           {/* Desktop */}
